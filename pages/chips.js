@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 import MaterialThemeProvider from '../src/theme/ThemeProvider';
 import { Chip, ChipAvatar, ChipLabel, ChipDeleteIcon } from '../src/components/Chip';
 import { ArrowDropDownIcon } from '../src';
@@ -24,6 +25,23 @@ const CustomChip = Chip.extend`
     fill: violet;
   }
 `;
+
+const CustomRenderProp = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 2px;
+  margin: auto 10px;
+  div {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: red;
+    margin: -2px 0 0 5px;
+  }
+`;
+
+const ChipRenderProp = () =>
+  <CustomRenderProp>With Render Prop For Label <div /></CustomRenderProp>;
 
 class ChipsPage extends PureComponent {
   state = {
@@ -60,6 +78,7 @@ class ChipsPage extends PureComponent {
           <Chip label="Uncontrolled Deletable chip" removable avatar="CA" />
           <Chip label="Controlled Deletable chip" onDelete={this.handleRemove} removed={removed} />
           <CustomChip label="Custom Chip" avatar="AB" removable />
+          <Chip label={ChipRenderProp} />
           <Chip
             label="Custom Remove icon"
             removeIcon={ArrowDropDownIcon}
